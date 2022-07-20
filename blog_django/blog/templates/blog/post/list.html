@@ -1,14 +1,16 @@
 {% block content %}
 <h1>My blog</h1>
 {% for post in posts %}
+<a href="{{ post.get_url }}">
+    <h2>{{ post.title }}</h2>
+</a>
 
-<h2>{{ post.title }}</h2>
 <p>
 
     Published {{ post.publish }} by {{ post.auther }}
 </p>
 
-    {{post.body}}
+{{post.body|truncatechars:5 }}
 
 {% endfor %}
 {% endblock %}
