@@ -1,0 +1,14 @@
+{% block content %}
+<h1>My blog</h1>
+{% for post in posts %}
+
+<h2>{{ post.title }}</h2>
+<p>
+
+    Published {{ post.publish }} by {{ post.auther }}
+</p>
+
+    {{post.body}}
+
+{% endfor %}
+{% endblock %}
