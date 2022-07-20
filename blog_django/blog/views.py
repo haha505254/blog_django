@@ -2,9 +2,18 @@ from django.shortcuts import render
 
 # Create your views here.
 from .models import Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def post_list(request):
-    posts =  Post.objects.all()
+    posts_list =  Post.objects.all()
+    paginator = Paginator(posts_list, 1)
+    page = request.GET.get('page')  # 获取页码
+    try:
+        posts = paginator.page(page)  # 获取某页对应的记录
+    except PageNotAnInteger:  # 如果页码不是个整数
+        posts = paginator.page(1)  # 取第一页的记录
+    except EmptyPage:  # 如果页码太大，没有相应的记录
+        posts = paginator.page(paginator.num_pages)  # 取最后一页的记录
     return render(request,'blog/post/list.html',locals())
 
 

@@ -13,4 +13,17 @@
 {{post.body|truncatechars:5 }}
 
 {% endfor %}
+
+<p>
+
+
+    {% for page_number in posts.paginator.page_range %}
+      {% if page_number == posts.number %}
+        {{ page_number }}
+      {% else %}
+        <a href="?page={{ page_number }}">{{ page_number }}</a>
+      {% endif %}
+    {% endfor %}
+  </p>
+
 {% endblock %}
