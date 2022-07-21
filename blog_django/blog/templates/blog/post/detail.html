@@ -1,31 +1,24 @@
 {% block content %}
 
-
 <h2>{{ post.title }}</h2>
 <p>
-
     Published {{ post.publish }} by {{ post.auther }}
 </p>
-
     {{post.body|linebreaks}}
-
-
     {% with post.comments.count as total_comments %}
     <h2>
-    {{ total_comments }} comment {{ total_comments Ipluralize ))
+    {{ total_comments }} comment{{total_comments|pluralize}}
     </h2>
-    (% endwith %)
-    [% for comment in post.comments[all 왕
+    {% endwith %}
+    {% for comment in post.comments.all %} 
     <div>
     <p>
-    Comment by (( comment.username )) (f comment. created ))
+    Comment by {{ comment.username }}  {{ comment.created }}
     </p>
-    (f comment.body| linebreaks )
+    {{ comment.body| linebreaks }}
     </div>
-    (% empty 왕
+    {% empty %}
     <p>There are no comments yet.</p>
-    (% endfor %]
-    endblock 왕
+    {% endfor %}
 
-
-{% endblock %}
+    {% endblock %}
