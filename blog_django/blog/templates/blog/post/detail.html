@@ -9,4 +9,23 @@
 
     {{post.body|linebreaks}}
 
+
+    {% with post.comments.count as total_comments %}
+    <h2>
+    {{ total_comments }} comment {{ total_comments Ipluralize ))
+    </h2>
+    (% endwith %)
+    [% for comment in post.comments[all 왕
+    <div>
+    <p>
+    Comment by (( comment.username )) (f comment. created ))
+    </p>
+    (f comment.body| linebreaks )
+    </div>
+    (% empty 왕
+    <p>There are no comments yet.</p>
+    (% endfor %]
+    endblock 왕
+
+
 {% endblock %}
