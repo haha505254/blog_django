@@ -2,12 +2,15 @@
 <h1>My blog</h1>
 {% for post in posts %}
 <a href="{{ post.get_url }}">
-    <h2>{{ post.title }}</h2>
+  <h2>{{ post.title }}</h2>
 </a>
 
 <p>
 
-    Published {{ post.publish }} by {{ post.auther }}
+  Published {{ post.publish }} by {{ post.auther }}
+</p>
+<p>
+  Tags {{ post.tag_name.all|join:', ' }}
 </p>
 
 {{post.body|truncatechars:5 }}
@@ -17,13 +20,13 @@
 <p>
 
 
-    {% for page_number in posts.paginator.page_range %}
-      {% if page_number == posts.number %}
-        {{ page_number }}
-      {% else %}
-        <a href="?page={{ page_number }}">{{ page_number }}</a>
-      {% endif %}
-    {% endfor %}
-  </p>
+  {% for page_number in posts.paginator.page_range %}
+  {% if page_number == posts.number %}
+  {{ page_number }}
+  {% else %}
+  <a href="?page={{ page_number }}">{{ page_number }}</a>
+  {% endif %}
+  {% endfor %}
+</p>
 
 {% endblock %}

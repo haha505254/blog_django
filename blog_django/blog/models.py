@@ -5,6 +5,12 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+
+class Tag(models.Model):
+    title = models.CharField(max_length=250)
+    
+    def __str__(self):
+        return self.title
 class Post(models.Model):
 
     STATUS_CHOICES = (
@@ -26,6 +32,7 @@ class Post(models.Model):
         max_length=10,
         choices=STATUS_CHOICES,
         default='draft')
+    tag_name = models.ManyToManyField(Tag)
 
     class Meta:
         ordering = ('-publish',)
@@ -44,6 +51,9 @@ class Post(models.Model):
             ]
         )
     
+
+
+
 class Comment(models.Model):
 
     post = models.ForeignKey(
