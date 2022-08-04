@@ -11,6 +11,7 @@ def post_list(request,tag_slug=None):
         posts_list =  Post.objects.filter(tag_name__in=[tag])
     else:
         posts_list =  Post.objects.all()
+    tag_list = Tag.objects.all()
     paginator = Paginator(posts_list, 3)
     page = request.GET.get('page')  # 获取页码
     try:

@@ -34,4 +34,14 @@
   {% endfor %}
 </p>
 
+<hr>
+
+<div>
+{% for tag in tag_list %}
+<a href="{% url 'blog:post_list_by_tag' tag.title %}">{{ tag.title }}</a>
+{{ tag.post_set.count }}
+{% endfor %}
+
+</div>
+
 {% endblock %}
