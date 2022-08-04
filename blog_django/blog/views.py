@@ -1,11 +1,16 @@
+from turtle import title
 from django.shortcuts import render
 from .forms import CommentForm
 # Create your views here.
-from .models import Post
+from .models import Post,Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-def post_list(request):
-    posts_list =  Post.objects.all()
+def post_list(request,tag_slug=None):
+    if tag_slug:
+        tag = Tag.objects.filter(title=tag_slug).first()
+        posts_list =  Post.objects.filter(tag_name__in=[tag])
+    else:
+        posts_list =  Post.objects.all()
     paginator = Paginator(posts_list, 3)
     page = request.GET.get('page')  # 获取页码
     try:

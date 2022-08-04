@@ -34,6 +34,9 @@ class Post(models.Model):
         default='draft')
     tag_name = models.ManyToManyField(Tag)
 
+    def get_tags(self):
+        return ",".join([p.title for p in self.tag_name.all()])
+
     class Meta:
         ordering = ('-publish',)
 

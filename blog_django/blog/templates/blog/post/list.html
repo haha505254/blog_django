@@ -10,7 +10,12 @@
   Published {{ post.publish }} by {{ post.auther }}
 </p>
 <p>
-  Tags {{ post.tag_name.all|join:', ' }}
+  Tags:
+  {% for tag in post.tag_name.all %}
+  <a href="{% url 'blog:post_list_by_tag' tag.title %}">{{ tag.title }}</a>
+  {% if not forloop.last %}, {% endif %}
+
+  {% endfor %}
 </p>
 
 {{post.body|truncatechars:5 }}
